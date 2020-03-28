@@ -1,0 +1,32 @@
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "Registration" (
+	"id"	INTEGER,
+	"name"	TEXT NOT NULL,
+	"address"	TEXT NOT NULL,
+	"contact_no"	INTEGER NOT NULL,
+	"age"	INTEGER NOT NULL,
+	"event_id"	INTEGER NOT NULL,
+	"confirmation_no"	INTEGER,
+	PRIMARY KEY("id"),
+	FOREIGN KEY("event_id") REFERENCES "Event"("id")
+);
+CREATE TABLE IF NOT EXISTS "Price" (
+	"id"	INTEGER PRIMARY KEY AUTOINCREMENT,
+	"age_group"	TEXT NOT NULL,
+	"rate"	INTEGER NOT NULL,
+	"event_id"	INTEGER NOT NULL,
+	FOREIGN KEY("event_id") REFERENCES "Event"("id")
+);
+CREATE TABLE IF NOT EXISTS "Event" (
+	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	"name"	TEXT NOT NULL,
+	"date"	TEXT NOT NULL,
+	"venue"	TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS "User" (
+	"Id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	"Username"	TEXT NOT NULL UNIQUE,
+	"Password"	TEXT NOT NULL
+);
+INSERT INTO "User" ("Id","Username","Password") VALUES (1,'admin','admin');
+COMMIT;
