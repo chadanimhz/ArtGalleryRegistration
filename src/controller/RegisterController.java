@@ -29,7 +29,7 @@ public class RegisterController {
 	public  void register() {
 		
 		EventController eventController=new EventController();
-		eventController.listEvents();
+		eventController.listEventsByDate();
 		System.out.println(" Enter event id for which you want to register");
 		int eventId = scanner.nextInt();
 		System.out.println("Enter full name");
