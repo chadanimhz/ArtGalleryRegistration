@@ -15,8 +15,8 @@ public class LoginController {
 		System.out.println("Enter 1 for login and any other key for register");
 		String input=scanner.nextLine();
 				
-		if(input == "1") {
-			System.out.println("Admin Panel.....Login....!!");
+		if(input.equals("1")) {
+			System.out.println("Admin Panel.....Login....test!!");
 			System.out.println("Enter username");
 			String username = scanner.nextLine();
 			System.out.println("Enter Password");
