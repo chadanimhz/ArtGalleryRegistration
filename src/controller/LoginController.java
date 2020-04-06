@@ -12,7 +12,7 @@ public class LoginController {
 		
 		Scanner scanner = new Scanner(System.in);
 		
-		System.out.println("Enter 1 for login and any other key for register");
+		System.out.println("Enter 1 for login and any other key for registration");
 		String input=scanner.nextLine();
 				
 		if(input.equals("1")) {

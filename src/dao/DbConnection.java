@@ -72,7 +72,7 @@ public class DbConnection {
 		return eventList;
 	}
 	
-	public ArrayList<Event> getEventsByDate() {
+	public ArrayList<Event> getUpcomingEvents() {
 		Connection con=getCon();
 		String sql="Select * from event where date('now') < date";
 		ArrayList<Event> eventList=new ArrayList<>();
@@ -99,6 +99,53 @@ public class DbConnection {
 		return eventList;
 	}
 	
+	public ArrayList<Event> getCompletedEvents() {
+		Connection con=getCon();
+		String sql="Select * from event where date('now') > date";
+		ArrayList<Event> eventList=new ArrayList<>();
+		
+		try {			
+			Statement statement = con.createStatement();
+			ResultSet rs = statement.executeQuery(sql);
+			while(rs.next()){
+					Event event=new Event();
+					event.setId(rs.getInt("id"));
+					event.setName(rs.getString("name"));
+					event.setDate(rs.getString("date"));
+					event.setVenue(rs.getString("venue"));
+					event.setChildRate(rs.getDouble("child_rate"));
+					event.setAdultRate(rs.getDouble("adult_rate"));
+					event.setAgedRate(rs.getDouble("aged_rate"));
+					eventList.add(event);
+		      }
+			con.close();
+			
+		}catch(Exception e) {
+			System.out.print(e);
+		}
+		return eventList;
+	}
+	
+	public Event getEvent(String sql) {
+		Connection con=getCon();
+		Event event=new Event();
+		try {			
+			Statement statement = con.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			while (result.next()) {
+				event.setId(Integer.parseInt(result.getString("id")));
+				event.setName(result.getString("name"));
+				con.close();
+				return event;
+			}
+			con.close();
+			
+			
+		}catch(Exception e) {
+			System.out.print(e);
+		}
+		return null;
+	}
 		
 	public double getPrice(String sql) {
 		Connection con=getCon();

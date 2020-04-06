@@ -49,8 +49,25 @@ public class EventController {
 		System.out.println("\n");
 	}
 	
-	public void listEventsByDate() {
-		ArrayList<Event> eventList=dbConnection.getEventsByDate();
+	public void listUpcomingEvents() {
+		ArrayList<Event> eventList=dbConnection.getUpcomingEvents();
+		
+		for (Event event : eventList) {
+			System.out.print("\nEvent id : "+event.getId()+
+					",\t Event name : "+event.getName()+
+					",\t Event Date :"+event.getDate()+
+					",\t Event venue :"+event.getVenue()+
+					",\t Child Rate :"+event.getChildRate()+
+					",\t Adult Rate :"+event.getAdultRate()+
+					",\t Aged RAte :"+event.getAgedRate()+
+					",");
+		}
+		
+		System.out.println("\n");
+	}
+	
+	public void listCompletedEvents() {
+		ArrayList<Event> eventList=dbConnection.getCompletedEvents();
 		
 		for (Event event : eventList) {
 			System.out.print("\nEvent id : "+event.getId()+

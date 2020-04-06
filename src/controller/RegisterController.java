@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.util.Scanner;
 
 import dao.DbConnection;
+import model.Event;
 import model.Registration;
 
 public class RegisterController {
@@ -27,11 +28,12 @@ public class RegisterController {
 	DbConnection dbConnection=new DbConnection();
 
 	public  void register() {
-		
+
 		EventController eventController=new EventController();
-		eventController.listEventsByDate();
-		System.out.println(" Enter event id for which you want to register");
-		int eventId = scanner.nextInt();
+		System.out.println("completed Events !!!!!");
+		eventController.listCompletedEvents();
+		
+		int eventId = getEvent();
 		System.out.println("Enter full name");
 		String name= scanner.next();
 		System.out.println("Enter address");
@@ -58,21 +60,54 @@ public class RegisterController {
 		String confirmation=generateRandomString();
 		
 		Registration registration=new Registration( name, address, contact, age,confirmation,rate );
+		registerClient(registration, eventId);
+		
+	}
+	
+	public int getEvent() {
+		EventController eventController=new EventController();
+		
+		System.out.println("Upcoming Events !!!!!");
+		eventController.listUpcomingEvents();
+		
+		System.out.println(" Enter event id from upcoming event for which you want to register");
+		int eventId = scanner.nextInt();
+		String sql = "Select * from event where date('now') < date and id="+eventId;
+		Event event = dbConnection.getEvent(sql);
+		if(event==null) {
+			System.out.println("Invalid Event ....!!!");
+			getEvent();
+		}
+		
+		
+		return eventId;
+	}
+	
+	public void registerClient(Registration registration,int eventId) {
 		System.out.println("Are you sure you want to confirm registratioin with following information? Type y or n");
 		System.out.println(registration.toString());
 		
 		String confirm= scanner.next();
-		System.out.println(confirm);
+		String sql;
 		if(confirm.equalsIgnoreCase("y")) {
-			String sql="Insert into registration (name,address,contact_no,age,event_id,confirmation_no)"
-					+ " values('"+name+"','"+address+"',"+contact+","+age+","+eventId+",'"+confirmation+"')";
+			sql="Insert into registration (name,address,contact_no,age,event_id,confirmation_no)"
+					+ " values('"+registration.getName()+"','"+registration.getAddress()+"',"+registration.getContact()+","+registration.getAge()+","+eventId+",'"+registration.getConfirmationNo()+"')";
 			dbConnection.insert(sql);
-			System.out.println("Registration !!!");
+			System.out.println("Thank you registration !!!!");
+			LoginController.main(null);
 			
 		}else {
-			System.out.println("sadasdas");
+			System.out.println("Do you want to change the event?Type y or n ");
+			String update= scanner.next();
+			if(update.equalsIgnoreCase("y")) {
+				eventId = getEvent();
+				registerClient(registration, eventId);
+				
+			}else {
+				System.out.println("Thank you for visiting us !!!!");
+				LoginController.main(null);
+			}
 		}
-		
 	}
 	
 	public static String generateRandomString() {
