@@ -35,8 +35,8 @@ INSERT INTO "Age_group" ("id","type","from_age","to_age") VALUES (2,'youth',17,5
 INSERT INTO "Age_group" ("id","type","from_age","to_age") VALUES (3,'aged',60,100);
 INSERT INTO "Event" ("id","name","date","venue","child_rate","adult_rate","aged_rate") VALUES (1,'test','2020-03-30','toronto',10,15,10);
 INSERT INTO "Event" ("id","name","date","venue","child_rate","adult_rate","aged_rate") VALUES (2,'test2','2020-04-03','toronto',5,20,15);
-INSERT INTO "Event" ("id","name","date","venue","child_rate","adult_rate","aged_rate") VALUES (3,'hgkj','hbhb','hbjbkj',6,20,10);
-INSERT INTO "Event" ("id","name","date","venue","child_rate","adult_rate","aged_rate") VALUES (4,'hjghj','hbkjk','hjbjbn',5,20,10);
+INSERT INTO "Event" ("id","name","date","venue","child_rate","adult_rate","aged_rate") VALUES (3,'hgkj','2020-08-30','hbjbkj',6,20,10);
+INSERT INTO "Event" ("id","name","date","venue","child_rate","adult_rate","aged_rate") VALUES (4,'hjghj','2020-08-30','hjbjbn',5,20,10);
 INSERT INTO "Event" ("id","name","date","venue","child_rate","adult_rate","aged_rate") VALUES (5,'test12','2020-04-05','test',6,25,10);
 INSERT INTO "Event" ("id","name","date","venue","child_rate","adult_rate","aged_rate") VALUES (6,'Art ','2020-05-01','toronto',5,22,10);
 INSERT INTO "Event" ("id","name","date","venue","child_rate","adult_rate","aged_rate") VALUES (7,'test','2020-02-02','test',10,20,15);

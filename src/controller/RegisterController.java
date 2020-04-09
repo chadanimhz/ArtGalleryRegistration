@@ -33,6 +33,8 @@ public class RegisterController {
 		System.out.println("completed Events !!!!!");
 		eventController.listCompletedEvents();
 		
+		System.out.println("Upcoming Events !!!!!");
+		
 		int eventId = getEvent();
 		System.out.println("Enter full name");
 		String name= scanner.next();
@@ -67,19 +69,17 @@ public class RegisterController {
 	public int getEvent() {
 		EventController eventController=new EventController();
 		
-		System.out.println("Upcoming Events !!!!!");
+		System.out.println("Select an option from Upcoming Events !!!!!");
 		eventController.listUpcomingEvents();
 		
-		System.out.println(" Enter event id from upcoming event for which you want to register");
+		System.out.println(" Enter event id  for which you want to register");
 		int eventId = scanner.nextInt();
 		String sql = "Select * from event where date('now') < date and id="+eventId;
 		Event event = dbConnection.getEvent(sql);
 		if(event==null) {
-			System.out.println("Invalid Event ....!!!");
+			System.out.println("Invalid Event .... Sorry Event is already completed !!!");
 			getEvent();
 		}
-		
-		
 		return eventId;
 	}
 	
