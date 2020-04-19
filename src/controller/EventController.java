@@ -28,18 +28,18 @@ public class EventController {
 		String eventVenue = scanner.nextLine();
 		
 		System.out.println("Enter Fee for Children");		
-		String childRateString=scanner.next();
+		String childRateString=scanner.nextLine();
 		while(!checkNumber(childRateString)) {
 			System.out.println("Enter valid Fee for Children");
-			childRateString=scanner.next();
+			childRateString=scanner.nextLine();
 		}
 		Double childRate = Double.parseDouble(childRateString);
 		
 		System.out.println("Enter Fee for Adult");
-		String adultRateString=scanner.next();
+		String adultRateString=scanner.nextLine();
 		while(!checkNumber(adultRateString)) {
 			System.out.println("Enter valid Fee for Children");
-			adultRateString=scanner.next();
+			adultRateString=scanner.nextLine();
 		}
 		Double adultRate = Double.parseDouble(adultRateString);
 		
@@ -283,7 +283,7 @@ public class EventController {
 						",\t Name : "+registration.getName()+
 						",\t Address :"+registration.getAddress()+
 						",\t Age :"+registration.getAge()+
-						",\t Contact :"+registration.getContact()+
+						",\t Contact :"+(int)registration.getContact()+
 						",\t Fee :"+registration.getRate()+
 						",\t Confirmation no :"+registration.getConfirmationNo()+
 						",");
@@ -294,7 +294,10 @@ public class EventController {
 	
 	public boolean checkNumber(String num) {
 		try {
-		  Integer.parseInt(num);
+		 int number=  Integer.parseInt(num);
+		 if(number <= 0) {
+			 return false;
+		 }
 		  return true;
 		} catch (NumberFormatException e) {
 		 return false;

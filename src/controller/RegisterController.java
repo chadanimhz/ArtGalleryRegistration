@@ -38,21 +38,21 @@ public class RegisterController {
 		
 		int eventId = getEvent();
 		System.out.println("Enter full name");
-		String name= scanner.next();
+		String name= scanner.nextLine();
 		System.out.println("Enter address");
-		String address= scanner.next();
+		String address= scanner.nextLine();
 		System.out.println("Enter your contact");
-		String contactString=scanner.next();
+		String contactString=scanner.nextLine();
 		while(!checkNumber(contactString)) {
 			System.out.println("Enter valid contact number");
-			contactString=scanner.next();
+			contactString=scanner.nextLine();
 		}
-		Double contact = Double.parseDouble(contactString);
+		Integer contact = Integer.parseInt(contactString);
 		System.out.println("Enter your age");
-		String ageString=scanner.next();
+		String ageString=scanner.nextLine();
 		while(!checkNumber(ageString)) {
 			System.out.println("Enter valid age");
-			ageString=scanner.next();
+			ageString=scanner.nextLine();
 		}
 		int age = Integer.parseInt(ageString);
 		
@@ -66,10 +66,10 @@ public class RegisterController {
 				rate=dbConnection.getPrice("Select aged_rate as rate from event where id="+eventId);
 			}else {
 				System.out.println(" Invalid Age .....!!!!  \nEnter your age");
-				ageString=scanner.next();
+				ageString=scanner.nextLine();
 				while(!checkNumber(ageString)) {
 					System.out.println("Enter valid age");
-					ageString=scanner.next();
+					ageString=scanner.nextLine();
 				}
 				age = Integer.parseInt(ageString);
 
@@ -90,10 +90,10 @@ public class RegisterController {
 		eventController.listUpcomingEvents();
 		
 		System.out.println(" Enter event id  for which you want to register");
-		String eventIdString=scanner.next();
+		String eventIdString=scanner.nextLine();
 		while(!checkNumber(eventIdString)) {
 			System.out.println("Enter valid event id");
-			eventIdString=scanner.next();
+			eventIdString=scanner.nextLine();
 		}
 		int eventId = Integer.parseInt(eventIdString);
 		
@@ -110,7 +110,7 @@ public class RegisterController {
 		System.out.println("Are you sure you want to confirm registratioin with following information? Type y or n");
 		System.out.println(registration.toString());
 		
-		String confirm= scanner.next();
+		String confirm= scanner.nextLine();
 		String sql;
 		if(confirm.equalsIgnoreCase("y")) {
 			sql="Insert into registration (name,address,contact_no,age,event_id,confirmation_no)"
@@ -123,7 +123,7 @@ public class RegisterController {
 			
 		}else {
 			System.out.println("Do you want to change the event?Type y or n ");
-			String update= scanner.next();
+			String update= scanner.nextLine();
 			if(update.equalsIgnoreCase("y")) {
 				eventId = getEvent();
 				registerClient(registration, eventId);
