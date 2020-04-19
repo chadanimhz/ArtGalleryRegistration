@@ -47,7 +47,7 @@ public class RegisterController {
 			System.out.println("Enter valid contact number");
 			contactString=scanner.nextLine();
 		}
-		Integer contact = Integer.parseInt(contactString);
+		Long contact = Long.parseLong(contactString);
 		System.out.println("Enter your age");
 		String ageString=scanner.nextLine();
 		while(!checkNumber(ageString)) {
@@ -143,9 +143,6 @@ public class RegisterController {
 		PrintWriter outputFile;
 		try {
 			outputFile = new PrintWriter("registration"+regId+".txt");
-			outputFile.println(event.toString());
-			outputFile.println(registration.toString());
-
 			outputFile.println("Art gallery registration confirmation  \nEvent Detail:");
 			outputFile.println("name : "+event.getName());
 			outputFile.println("date : "+event.getDate());
@@ -178,7 +175,7 @@ public class RegisterController {
 	
 	public boolean checkNumber(String num) {
 		try {
-		  Integer.parseInt(num);
+		  Long.parseLong(num);
 		  return true;
 		} catch (NumberFormatException e) {
 		 return false;

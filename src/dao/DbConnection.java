@@ -16,7 +16,7 @@ public class DbConnection {
 	public Connection getCon() {
 		Connection con;
 		try {
-			String dbPath = "jdbc:sqlite:C:\\Users\\chada\\OneDrive\\Documents\\artGalleryDb.db";
+			String dbPath = "jdbc:sqlite:C:\\Users\\hp\\git\\artgalleryDb.db";
 			con = DriverManager.getConnection(dbPath);
 			return con;
 		}catch (Exception e) {
@@ -205,7 +205,7 @@ public class DbConnection {
 			registration.setAddress(result.getString("address"));
 			registration.setName(result.getString("name"));
 			registration.setAge(Integer.parseInt(result.getString("age")));
-			registration.setContact(Integer.parseInt(result.getString("contact")));
+			registration.setContact(Long.parseLong(result.getString("contact")));
 			statement.close();
 			con.close();
 		}catch(Exception e) {
@@ -228,7 +228,7 @@ public class DbConnection {
 					registration.setAddress(rs.getString("address"));
 					registration.setName(rs.getString("name"));
 					registration.setAge(Integer.parseInt(rs.getString("age")));
-					registration.setContact(Integer.parseInt(rs.getString("contact_no")));
+					registration.setContact(Long.parseLong(rs.getString("contact_no")));
 					registration.setConfirmationNo(rs.getString("confirmation_no"));
 					registrationList.add(registration);
 		      }

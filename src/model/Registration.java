@@ -5,7 +5,7 @@ public class Registration {
 	private int id;
 	private String name;
 	private String address;
-	private Integer contact;
+	private Long contact;
 	private int age;
 	private String confirmationNo;
 	private double rate;
@@ -15,7 +15,7 @@ public class Registration {
 	}
 	
 
-	public Registration(String name, String address, Integer contact, int age, String confirmationNo, double rate) {
+	public Registration(String name, String address, Long contact, int age, String confirmationNo, double rate) {
 
 		this.name = name;
 		this.address = address;
@@ -44,10 +44,10 @@ public class Registration {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public double getContact() {
+	public Long getContact() {
 		return contact;
 	}
-	public void setContact(Integer contact) {
+	public void setContact(Long contact) {
 		this.contact = contact;
 	}
 	public int getAge() {

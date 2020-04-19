@@ -283,7 +283,7 @@ public class EventController {
 						",\t Name : "+registration.getName()+
 						",\t Address :"+registration.getAddress()+
 						",\t Age :"+registration.getAge()+
-						",\t Contact :"+(int)registration.getContact()+
+						",\t Contact :"+registration.getContact()+
 						",\t Fee :"+registration.getRate()+
 						",\t Confirmation no :"+registration.getConfirmationNo()+
 						",");
