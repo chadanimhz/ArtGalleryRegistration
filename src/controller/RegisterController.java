@@ -90,7 +90,13 @@ public class RegisterController {
 		eventController.listUpcomingEvents();
 		
 		System.out.println(" Enter event id  for which you want to register");
-		int eventId = scanner.nextInt();
+		String eventIdString=scanner.next();
+		while(!checkNumber(eventIdString)) {
+			System.out.println("Enter valid event id");
+			eventIdString=scanner.next();
+		}
+		int eventId = Integer.parseInt(eventIdString);
+		
 		String sql = "Select * from event where date('now') < date and id="+eventId;
 		Event event = dbConnection.getEvent(sql);
 		if(event==null) {

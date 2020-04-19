@@ -131,7 +131,12 @@ public class EventController {
 		listUpcomingEvents();
 		
 		System.out.println(" Enter event id ");
-		int eventId = scanner.nextInt();
+		String eventIdString=scanner.next();
+		while(!checkNumber(eventIdString)) {
+			System.out.println("Enter valid event id");
+			eventIdString=scanner.next();
+		}
+		int eventId = Integer.parseInt(eventIdString);
 		String sql = "Select * from event where date('now') < date and id="+eventId;
 		Event event = dbConnection.getEvent(sql);
 		if(event==null) {
@@ -222,7 +227,12 @@ public class EventController {
 		listUpcomingEvents();
 		
 		System.out.println(" Enter event id ");
-		int eventId = scanner.nextInt();
+		String eventIdString=scanner.next();
+		while(!checkNumber(eventIdString)) {
+			System.out.println("Enter valid event id");
+			eventIdString=scanner.next();
+		}
+		int eventId = Integer.parseInt(eventIdString);
 		String sql = "Select * from event where date('now') < date and id="+eventId;
 		Event event = dbConnection.getEvent(sql);
 		if(event==null) {
@@ -256,7 +266,12 @@ public class EventController {
 	public void listRegistration() {
 		listEvents();
 		System.out.println("Select the Event Id of which you want to List Registration. ");
-		int eventId = scanner.nextInt();
+		String eventIdString=scanner.next();
+		while(!checkNumber(eventIdString)) {
+			System.out.println("Enter valid event id");
+			eventIdString=scanner.next();
+		}
+		int eventId = Integer.parseInt(eventIdString);
 		
 		ArrayList<Registration> registrationList=dbConnection.getRegistrationsListByEvent(eventId);
 		
@@ -287,7 +302,7 @@ public class EventController {
 	}
 	
 	public boolean checkDate(String date) {
-		if (date.matches("/\\d{4}-\\d{2}-\\d{2}/")) {
+		if (date.matches("\\d{4}-\\d{2}-\\d{2}")) {
 		   return true;
 		}
 		return false;

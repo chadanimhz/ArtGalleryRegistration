@@ -23,7 +23,7 @@ public class LoginController {
 
 			console.printf("Enter Password \n");
 			char[] pass = console.readPassword();
-			String password = pass.toString();
+			String password = String. valueOf(pass);
 			verifyUser(username, password);
 			
 			AdminController.admin();
