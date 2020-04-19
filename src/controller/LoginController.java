@@ -6,28 +6,23 @@ import dao.DbConnection;
 public class LoginController {
 	
 	public static void main(String[] args) {
-//		EventController eventController=new EventController();
-//		eventController.addEvent();
-//		eventController.listEvents();
-//		eventController.updateEvents();
-//		eventController.deleteEvents();
-//		eventController.listRegistration();
-	
 		
 		Scanner scanner = new Scanner(System.in);
 		
+		System.out.println("Art Gallery, booking made simple");
 		System.out.println("Enter 1 for admin login and any other key for registration");
 		String input=scanner.nextLine();
 				
 		if(input.equals("1")) {
-			System.out.println("Admin Panel.....Login....test!!");
-			System.out.println("Enter username");
-			String username = scanner.nextLine();
-			System.out.println("Enter Password");
-			String password = scanner.nextLine();
-			
+			System.out.println("Admin Panel.....Login !!");
+//			System.out.println("Enter username");
+//			String username = scanner.nextLine();
+//			System.out.println("Enter Password");
+//			String password = scanner.nextLine();
+			// bharat code
 			AdminController.admin();
 		}else {
+//			System.out.println("sdasdsa test");
 			RegisterController registerController=new RegisterController();
 			registerController.register();
 		}

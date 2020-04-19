@@ -229,6 +229,7 @@ public class DbConnection {
 					registration.setName(rs.getString("name"));
 					registration.setAge(Integer.parseInt(rs.getString("age")));
 					registration.setContact(Integer.parseInt(rs.getString("contact_no")));
+					registration.setConfirmationNo(rs.getString("confirmation_no"));
 					registrationList.add(registration);
 		      }
 			statement.close();

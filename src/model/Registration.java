@@ -70,8 +70,8 @@ public class Registration {
 	}
 
 	public String toString() {
-		return "Registration [id=" + id + ", name=" + name + ", address=" + address + ", contact=" + contact + ", age="
-				+ age + ", confirmationNo=" + confirmationNo + ", rate=" + rate + "]";
+		return "Registration [name=" + name + ", address=" + address + ", contact=" + contact + ", age="
+				+ age + ", confirmationNo=" + confirmationNo + ", total amount=" + rate + "]";
 	}
 	
 	

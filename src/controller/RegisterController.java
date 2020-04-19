@@ -30,8 +30,8 @@ public class RegisterController {
 	public  void register() {
 
 		EventController eventController=new EventController();
-		System.out.println("completed Events !!!!!");
-		eventController.listCompletedEvents();
+//		System.out.println("completed Events !!!!!");
+//		eventController.listCompletedEvents();
 		
 		System.out.println("Upcoming Events !!!!!");
 		
@@ -93,7 +93,8 @@ public class RegisterController {
 			sql="Insert into registration (name,address,contact_no,age,event_id,confirmation_no)"
 					+ " values('"+registration.getName()+"','"+registration.getAddress()+"',"+registration.getContact()+","+registration.getAge()+","+eventId+",'"+registration.getConfirmationNo()+"')";
 			dbConnection.insert(sql);
-			System.out.println("Thank you registration !!!!");
+			System.out.println("Thank you for registration!!! \nHere is your confirmation number "+registration.getConfirmationNo());
+			System.out.println("Please visit us again!!! \n \n");
 			LoginController.main(null);
 			
 		}else {

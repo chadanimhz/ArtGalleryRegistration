@@ -15,17 +15,18 @@ public class EventController {
 	
 	public void addEvent() {
 		
+		System.out.println("Add Event !!!! \n");
 		System.out.println("Enter event name");
 		String eventName = scanner.nextLine();
 		System.out.println("Enter event date");
 		String eventDate = scanner.nextLine();
 		System.out.println("Enter event venue");
 		String eventVenue = scanner.nextLine();
-		System.out.println("Enter Rate for Children");
+		System.out.println("Enter  Fee for Children");
 		double childRate=scanner.nextDouble();
-		System.out.println("Enter Rate for Adult");
+		System.out.println("Enter  Fee for Adult");
 		double adultRate=scanner.nextDouble();
-		System.out.println("Enter Rate for Aged");
+		System.out.println("Enter  Fee for Aged");
 		double agedRate=scanner.nextDouble();
 		
 		String sqlEvent="Insert into Event (name,date,venue,child_rate,adult_rate,aged_rate) VALUES ('"+eventName+"','"+eventDate+"','"+eventVenue+"',"+childRate+","+adultRate+","+agedRate+")";
@@ -34,19 +35,25 @@ public class EventController {
 	}
 	
 	public void listEvents() {
-		ArrayList<Event> eventList=dbConnection.getEvents();
+		System.out.println("Event List");
+//		ArrayList<Event> eventList=dbConnection.getEvents();
+//		
+//		for (Event event : eventList) {
+//			System.out.print("\nEvent id : "+event.getId()+
+//					",\t Event name : "+event.getName()+
+//					",\t Event Date :"+event.getDate()+
+//					",\t Event venue :"+event.getVenue()+
+//					",\t Child  Fee :"+event.getChildRate()+
+//					",\t Adult  Fee :"+event.getAdultRate()+
+//					",\t Retired  Fee :"+event.getAgedRate()+
+//					",");
+//		}
 		
-		for (Event event : eventList) {
-			System.out.print("\nEvent id : "+event.getId()+
-					",\t Event name : "+event.getName()+
-					",\t Event Date :"+event.getDate()+
-					",\t Event venue :"+event.getVenue()+
-					",\t Child Rate :"+event.getChildRate()+
-					",\t Adult Rate :"+event.getAdultRate()+
-					",\t Aged RAte :"+event.getAgedRate()+
-					",");
-		}
-		
+		System.out.println("Completed Event !!!!");
+		listCompletedEvents();
+
+		System.out.println("Upcoming Event !!!!!");
+		listUpcomingEvents();
 		System.out.println("\n");
 	}
 	
@@ -58,9 +65,9 @@ public class EventController {
 					",\t Event name : "+event.getName()+
 					",\t Event Date :"+event.getDate()+
 					",\t Event venue :"+event.getVenue()+
-					",\t Child Rate :"+event.getChildRate()+
-					",\t Adult Rate :"+event.getAdultRate()+
-					",\t Aged RAte :"+event.getAgedRate()+
+					",\t Child  Fee :"+event.getChildRate()+
+					",\t Adult  Fee :"+event.getAdultRate()+
+					",\t Aged  Fee :"+event.getAgedRate()+
 					",");
 		}
 		
@@ -75,9 +82,9 @@ public class EventController {
 					",\t Event name : "+event.getName()+
 					",\t Event Date :"+event.getDate()+
 					",\t Event venue :"+event.getVenue()+
-					",\t Child Rate :"+event.getChildRate()+
-					",\t Adult Rate :"+event.getAdultRate()+
-					",\t Aged RAte :"+event.getAgedRate()+
+					",\t Child  Fee :"+event.getChildRate()+
+					",\t Adult  Fee :"+event.getAdultRate()+
+					",\t Aged  Fee :"+event.getAgedRate()+
 					",");
 		}
 		
@@ -162,7 +169,7 @@ public class EventController {
 				}
 				System.out.println("Event Updated Successfully");
 			}else {
-				listEvents();
+				AdminController.admin();
 			}
 		}
 		return eventId;
@@ -191,9 +198,9 @@ public class EventController {
 				sql="Delete from event where id="+eventId;
 				dbConnection.executeSQLQuery(sql);
 				System.out.println("Event Deleted Successfully !!!!");
-				listEvents();
+				AdminController.admin();
 			}else {
-				listEvents();
+				AdminController.admin();
 			}
 		}
 		return eventId;
@@ -215,7 +222,7 @@ public class EventController {
 						",\t Address :"+registration.getAddress()+
 						",\t Age :"+registration.getAge()+
 						",\t Contact :"+registration.getContact()+
-						",\t Rate :"+registration.getRate()+
+						",\t Fee :"+registration.getRate()+
 						",\t Confirmation no :"+registration.getConfirmationNo()+
 						",");
 			}
