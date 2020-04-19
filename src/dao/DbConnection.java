@@ -241,22 +241,28 @@ public class DbConnection {
 		return registrationList;
 	}
 	
-	public User getUserDetailByUsername(String username) {
+	public User getUserDetailByUsername(String username,String password) {
 		Connection con=getCon();
-		String sql="Select * from user where username = '"+username+"'";
+		String sql="Select * from user where username = '"+username+"' and password = '"+password+"'";
 		User user=new User();
 		try {			
 			Statement statement = con.createStatement();
 			ResultSet result = statement.executeQuery(sql);
-			user.setId(Integer.parseInt(result.getString("id")));
-			user.setPassword(result.getString("password"));
-			user.setUsername(result.getString("username"));
+			while (result.next()) {
+				user.setId(Integer.parseInt(result.getString("id")));
+				user.setPassword(result.getString("password"));
+				user.setUsername(result.getString("username"));
+				statement.close();
+				con.close();
+				return user;
+			}
 			statement.close();
 			con.close();
+			
 		}catch(Exception e) {
 			System.out.print(e);
 		}
-		return user;
+		return null;
 	}
 
 	public void executeSQLQuery(String sql) {

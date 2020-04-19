@@ -18,16 +18,38 @@ public class EventController {
 		System.out.println("Add Event !!!! \n");
 		System.out.println("Enter event name");
 		String eventName = scanner.nextLine();
-		System.out.println("Enter event date");
+		System.out.println("Enter event date in (yyyy-mm-dd) format");
 		String eventDate = scanner.nextLine();
+		while(!checkDate(eventDate)) {
+			System.out.println("Enter valid  event date in (yyyy-mm-dd) format");
+			eventDate = scanner.nextLine();
+		}
 		System.out.println("Enter event venue");
 		String eventVenue = scanner.nextLine();
-		System.out.println("Enter  Fee for Children");
-		double childRate=scanner.nextDouble();
-		System.out.println("Enter  Fee for Adult");
-		double adultRate=scanner.nextDouble();
-		System.out.println("Enter  Fee for Aged");
-		double agedRate=scanner.nextDouble();
+		
+		System.out.println("Enter Fee for Children");		
+		String childRateString=scanner.next();
+		while(!checkNumber(childRateString)) {
+			System.out.println("Enter valid Fee for Children");
+			childRateString=scanner.next();
+		}
+		Double childRate = Double.parseDouble(childRateString);
+		
+		System.out.println("Enter Fee for Adult");
+		String adultRateString=scanner.next();
+		while(!checkNumber(adultRateString)) {
+			System.out.println("Enter valid Fee for Children");
+			adultRateString=scanner.next();
+		}
+		Double adultRate = Double.parseDouble(adultRateString);
+		
+		System.out.println("Enter Fee for Aged");
+		String agedRateString=scanner.next();
+		while(!checkNumber(agedRateString)) {
+			System.out.println("Enter valid Fee for Children");
+			agedRateString=scanner.next();
+		}
+		Double agedRate = Double.parseDouble(agedRateString);
 		
 		String sqlEvent="Insert into Event (name,date,venue,child_rate,adult_rate,aged_rate) VALUES ('"+eventName+"','"+eventDate+"','"+eventVenue+"',"+childRate+","+adultRate+","+agedRate+")";
 		dbConnection.insert(sqlEvent);
@@ -118,7 +140,7 @@ public class EventController {
 		}else {
 			int regCount=dbConnection.getRegistrationCountByEvent(eventId);
 			if(regCount!=0) {
-				System.out.println("Invalid Event ....!!!");
+				System.out.println("This Event Cannot be Updated. Customer has already registered for this event ....!!!");
 				update();
 			}
 			System.out.println(" Are you sure you want to update the event with following information? Type y or n");
@@ -137,8 +159,12 @@ public class EventController {
 					  dbConnection.update(sql);
 					  break;
 				  case 2:
-					  System.out.println("Enter Event Date");
+					  System.out.println("Enter Event Date in (yyyy-mm-dd) format");
 					  String date=scanner.next();
+					  while(!checkDate(date)) {
+							System.out.println("Enter valid  event date in (yyyy-mm-dd) format");
+							date = scanner.nextLine();
+						}
 					  sql="Update event set date='"+ date +"' where id="+eventId;
 					  dbConnection.update(sql);
 					  break;
@@ -150,19 +176,34 @@ public class EventController {
 					  break;
 				  case 4:
 					  System.out.println("Enter Rate for Children");
-					  double childRate=scanner.nextDouble();
+					  String childRateString=scanner.next();
+					  while(!checkNumber(childRateString)) {
+							System.out.println("Enter valid Fee for Children");
+							childRateString=scanner.next();
+					  }
+					  Double childRate = Double.parseDouble(childRateString);
 					  sql="Update event set child_rate='"+ childRate +"' where id="+eventId;
 					  dbConnection.update(sql);
 					  break;
 				  case 5:
 					  System.out.println("Enter Rate for Adult");
-					  double adultRate=scanner.nextDouble();
+					  String adultRateString=scanner.next();
+					  while(!checkNumber(adultRateString)) {
+							System.out.println("Enter valid Fee for Children");
+							adultRateString=scanner.next();
+					  }
+					  Double adultRate = Double.parseDouble(adultRateString);
 					  sql="Update event set adult_rate='"+ adultRate +"' where id="+eventId;
 					  dbConnection.update(sql);
 					  break;
 				  case 6:
 					  System.out.println("Enter Rate for Aged");
-					  double agedRate=scanner.nextDouble();
+					  String agedRateString=scanner.next();
+					  while(!checkNumber(agedRateString)) {
+							System.out.println("Enter valid Fee for Children");
+							agedRateString=scanner.next();
+					  }
+					  Double agedRate = Double.parseDouble(agedRateString);
 					  sql="Update event set aged_rate='"+ agedRate +"' where id="+eventId;
 					  dbConnection.update(sql);
 					  break;
@@ -188,7 +229,13 @@ public class EventController {
 			System.out.println("Invalid Event ....!!!");
 			delete();
 		}else {
-			System.out.println("Deleting event will delete all the registration under this event. \n Are you sure you want to delete the event with following information? Type y or n");
+//			System.out.println("Deleting event will delete all the registration under this event. \n Are you sure you want to delete the event with following information? Type y or n");
+			int regCount=dbConnection.getRegistrationCountByEvent(eventId);
+			if(regCount!=0) {
+				System.out.println("This Event Cannot be Deleted. Customer has already registered for this event ....!!!");
+				delete();
+			}
+			System.out.println("Are you sure you want to delete the event with following information? Type y or n");
 			System.out.println(event.toString());
 			
 			String confirm= scanner.next();
@@ -227,9 +274,23 @@ public class EventController {
 						",");
 			}
 		}
-		
-		
 		System.out.println("\n");
-		
 	}
+	
+	public boolean checkNumber(String num) {
+		try {
+		  Integer.parseInt(num);
+		  return true;
+		} catch (NumberFormatException e) {
+		 return false;
+		} 
+	}
+	
+	public boolean checkDate(String date) {
+		if (date.matches("/\\d{4}-\\d{2}-\\d{2}/")) {
+		   return true;
+		}
+		return false;
+	}
+	
 }

@@ -1,46 +1,46 @@
 package controller;
+import java.io.Console;
 import java.util.Scanner;
 
 import dao.DbConnection;
+import model.User;
 
 public class LoginController {
 	
 	public static void main(String[] args) {
 		
 		Scanner scanner = new Scanner(System.in);
+		Console console=System.console();
 		
-		System.out.println("Art Gallery, booking made simple");
+		System.out.println("Art gallery, bookings made simple");
 		System.out.println("Enter 1 for admin login and any other key for registration");
 		String input=scanner.nextLine();
 				
 		if(input.equals("1")) {
 			System.out.println("Admin Panel.....Login !!");
-//			System.out.println("Enter username");
-//			String username = scanner.nextLine();
-//			System.out.println("Enter Password");
-//			String password = scanner.nextLine();
-			// bharat code
+			System.out.println("Enter username");
+			String username = scanner.nextLine();
+
+			console.printf("Enter Password \n");
+			char[] pass = console.readPassword();
+			String password = pass.toString();
+			verifyUser(username, password);
+			
 			AdminController.admin();
 		}else {
-//			System.out.println("sdasdsa test");
 			RegisterController registerController=new RegisterController();
 			registerController.register();
 		}
 		
-//		
-//		boolean isValid=verifyUser(username,password);
-		
-//		String sql = "Insert into user values (1,'admin','admin')";
-//
-//		DbConnection dbConnection=new DbConnection();
-//		dbConnection.insert(sql);
 	}
 	
-	private static boolean verifyUser(String username,String password) {
+	private static void verifyUser(String username,String password) {
 		DbConnection dbConnection=new DbConnection();
-		dbConnection.getUserDetailByUsername(username);
-		
-		return false;
+		User user= dbConnection.getUserDetailByUsername(username,password);
+		if(user==null) {
+			System.out.println("Invalid username/password");
+			LoginController.main(null);
+		}
 	}
 	
 	

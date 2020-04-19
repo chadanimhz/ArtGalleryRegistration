@@ -13,33 +13,27 @@ public class AdminController {
 		switch (option) {
 		case 1:
 			eventController.listEvents();
-		    AdminController.admin();
 		    break;
 		case 2:
 			eventController.listRegistration();
-			AdminController.admin();
 			break;
 		case 3:
 		    eventController.addEvent();
 		    System.out.println("Event Added Successfully");
-		    AdminController.admin();
 		    break;
 		case 4:
 		    eventController.updateEvents();
-		    AdminController.admin();
 		    break;
 		case 5:
 		    eventController.deleteEvents();
-		    AdminController.admin();
 		    break;
 		case 6:
-//		  logout();
 		    LoginController.main(null);
 		    break;
 		default:
 			System.out.println("Enter input is invalid please select from the list");
-			AdminController.admin();
 		}
+		AdminController.admin();
 				
 	}
 }

@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,9 +42,19 @@ public class RegisterController {
 		System.out.println("Enter address");
 		String address= scanner.next();
 		System.out.println("Enter your contact");
-		double contact=scanner.nextDouble();
+		String contactString=scanner.next();
+		while(!checkNumber(contactString)) {
+			System.out.println("Enter valid contact number");
+			contactString=scanner.next();
+		}
+		Double contact = Double.parseDouble(contactString);
 		System.out.println("Enter your age");
-		int age=scanner.nextInt();
+		String ageString=scanner.next();
+		while(!checkNumber(ageString)) {
+			System.out.println("Enter valid age");
+			ageString=scanner.next();
+		}
+		int age = Integer.parseInt(ageString);
 		
 		double rate=0;
 		while(rate==0) {
@@ -55,7 +66,13 @@ public class RegisterController {
 				rate=dbConnection.getPrice("Select aged_rate as rate from event where id="+eventId);
 			}else {
 				System.out.println(" Invalid Age .....!!!!  \nEnter your age");
-				age=scanner.nextInt();
+				ageString=scanner.next();
+				while(!checkNumber(ageString)) {
+					System.out.println("Enter valid age");
+					ageString=scanner.next();
+				}
+				age = Integer.parseInt(ageString);
+
 			}
 		}
 		
@@ -69,7 +86,7 @@ public class RegisterController {
 	public int getEvent() {
 		EventController eventController=new EventController();
 		
-		System.out.println("Select an option from Upcoming Events !!!!!");
+//		System.out.println("Select an option from Upcoming Events !!!!!");
 		eventController.listUpcomingEvents();
 		
 		System.out.println(" Enter event id  for which you want to register");
@@ -83,7 +100,7 @@ public class RegisterController {
 		return eventId;
 	}
 	
-	public void registerClient(Registration registration,int eventId) {
+	public void registerClient(Registration registration,int eventId){
 		System.out.println("Are you sure you want to confirm registratioin with following information? Type y or n");
 		System.out.println(registration.toString());
 		
@@ -92,7 +109,8 @@ public class RegisterController {
 		if(confirm.equalsIgnoreCase("y")) {
 			sql="Insert into registration (name,address,contact_no,age,event_id,confirmation_no)"
 					+ " values('"+registration.getName()+"','"+registration.getAddress()+"',"+registration.getContact()+","+registration.getAge()+","+eventId+",'"+registration.getConfirmationNo()+"')";
-			dbConnection.insert(sql);
+			int regId = dbConnection.insert(sql);
+			saveRegistration(regId,registration,eventId);
 			System.out.println("Thank you for registration!!! \nHere is your confirmation number "+registration.getConfirmationNo());
 			System.out.println("Please visit us again!!! \n \n");
 			LoginController.main(null);
@@ -111,6 +129,37 @@ public class RegisterController {
 		}
 	}
 	
+	private void saveRegistration(int regId,Registration registration,int eventId) {
+		System.out.println("test");
+		String sql = "Select * from event where  id="+eventId;
+		Event event = dbConnection.getEvent(sql);
+		
+		PrintWriter outputFile;
+		try {
+			outputFile = new PrintWriter("registration"+regId+".txt");
+			outputFile.println(event.toString());
+			outputFile.println(registration.toString());
+
+			outputFile.println("Art gallery registration confirmation  \nEvent Detail:");
+			outputFile.println("name : "+event.getName());
+			outputFile.println("date : "+event.getDate());
+			outputFile.println("venue : "+event.getVenue());
+			
+			outputFile.println("Registration Detail : ");
+			outputFile.println("name : "+registration.getName());
+			outputFile.println("total amount : "+registration.getRate());
+			outputFile.println("confirmation : "+registration.getConfirmationNo());
+			
+			outputFile.close(); 
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+		
+	}
+
 	public static String generateRandomString() {
         StringBuilder sb = new StringBuilder(10);
         for (int i = 0; i < 10; i++) {
@@ -120,5 +169,15 @@ public class RegisterController {
         }
         return sb.toString();
 	}
+	
+	public boolean checkNumber(String num) {
+		try {
+		  Integer.parseInt(num);
+		  return true;
+		} catch (NumberFormatException e) {
+		 return false;
+		} 
+	}
 }
+
 
