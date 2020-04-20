@@ -37,7 +37,7 @@ public class EventController {
 		System.out.println("Enter Fee for Adult");
 		String adultRateString=scanner.nextLine();
 		while(!checkNumber(adultRateString)) {
-			System.out.println("Enter valid Fee for Children");
+			System.out.println("Enter valid Fee for Adult");
 			adultRateString=scanner.nextLine();
 		}
 		Double adultRate = Double.parseDouble(adultRateString);
@@ -45,7 +45,7 @@ public class EventController {
 		System.out.println("Enter Fee for Aged");
 		String agedRateString=scanner.next();
 		while(!checkNumber(agedRateString)) {
-			System.out.println("Enter valid Fee for Children");
+			System.out.println("Enter valid Fee for Aged");
 			agedRateString=scanner.next();
 		}
 		Double agedRate = Double.parseDouble(agedRateString);
