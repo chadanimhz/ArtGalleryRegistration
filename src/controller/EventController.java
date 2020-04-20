@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import dao.DbConnection;
 import model.Event;
-import model.Price;
 import model.Registration;
 
 public class EventController {
@@ -284,7 +283,7 @@ public class EventController {
 						",\t Address :"+registration.getAddress()+
 						",\t Age :"+registration.getAge()+
 						",\t Contact :"+registration.getContact()+
-						",\t Fee :"+registration.getRate()+
+						",\t Total Amount :"+registration.getRate()+
 						",\t Confirmation no :"+registration.getConfirmationNo()+
 						",");
 			}

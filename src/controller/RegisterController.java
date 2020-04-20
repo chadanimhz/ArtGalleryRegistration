@@ -136,7 +136,7 @@ public class RegisterController {
 	}
 	
 	private void saveRegistration(int regId,Registration registration,int eventId) {
-		System.out.println("test");
+
 		String sql = "Select * from event where  id="+eventId;
 		Event event = dbConnection.getEvent(sql);
 		

@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.Event;
-import model.Price;
+
 import model.Registration;
 import model.User;
 
@@ -16,7 +16,7 @@ public class DbConnection {
 	public Connection getCon() {
 		Connection con;
 		try {
-			String dbPath = "jdbc:sqlite:C:\\Users\\hp\\git\\artgalleryDb.db";
+			String dbPath = "jdbc:sqlite:C:\\Users\\chada\\OneDrive\\Documents\\artGalleryDb.db";
 			con = DriverManager.getConnection(dbPath);
 			return con;
 		}catch (Exception e) {
@@ -216,7 +216,7 @@ public class DbConnection {
 	
 	public ArrayList<Registration> getRegistrationsListByEvent(int eventid) {
 		Connection con=getCon();
-		String sql="Select * from registration where event_id = '"+eventid+"'";
+		String sql="Select registration.*,child_rate,adult_rate,aged_rate from registration LEFT JOIN event on event.id=registration.event_id where event_id = '"+eventid+"'";
 		ArrayList<Registration> registrationList=new ArrayList<>();
 		
 		try {			
@@ -228,6 +228,13 @@ public class DbConnection {
 					registration.setAddress(rs.getString("address"));
 					registration.setName(rs.getString("name"));
 					registration.setAge(Integer.parseInt(rs.getString("age")));
+					if(registration.getAge()>10 && registration.getAge() <=16) {
+						registration.setRate(rs.getDouble("child_rate"));
+					}else if(registration.getAge() >16 && registration.getAge() <=60) {
+						registration.setRate(rs.getDouble("adult_rate"));
+					}else {
+						registration.setRate(rs.getDouble("aged_rate"));
+					}
 					registration.setContact(Long.parseLong(rs.getString("contact_no")));
 					registration.setConfirmationNo(rs.getString("confirmation_no"));
 					registrationList.add(registration);
