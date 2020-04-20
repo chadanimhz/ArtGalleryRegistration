@@ -130,7 +130,7 @@ public class EventController {
 		listUpcomingEvents();
 		
 		System.out.println(" Enter event id ");
-		String eventIdString=scanner.nextLine();
+		String eventIdString=scanner.next();
 		while(!checkNumber(eventIdString)) {
 			System.out.println("Enter valid event id");
 			eventIdString=scanner.next();
@@ -150,7 +150,7 @@ public class EventController {
 			System.out.println(" Are you sure you want to update the event with following information? Type y to confirm else any other key");
 			System.out.println(event.toString());
 			
-			String confirm= scanner.nextLine();
+			String confirm= scanner.next();
 			if(confirm.equalsIgnoreCase("y")) {
 				System.out.println("Enter following keys for updating information \n "+
 									"1 for name,2 for date, 3 for venue, 4 for child rate, 5 for adult rate, 6 for aged rate");
@@ -158,32 +158,32 @@ public class EventController {
 				switch (option) {
 				  case 1:
 					  System.out.println("Enter Event name");
-					  String name=scanner.nextLine();
+					  String name=scanner.next();
 					  sql="Update event set name='"+ name +"' where id="+eventId;
 					  dbConnection.update(sql);
 					  break;
 				  case 2:
 					  System.out.println("Enter Event Date in (yyyy-mm-dd) format");
-					  String date=scanner.nextLine();
+					  String date=scanner.next();
 					  while(!checkDate(date)) {
 							System.out.println("Enter valid  event date in (yyyy-mm-dd) format");
-							date = scanner.nextLine();
+							date = scanner.next();
 						}
 					  sql="Update event set date='"+ date +"' where id="+eventId;
 					  dbConnection.update(sql);
 					  break;
 				  case 3:
 					  System.out.println("Enter Event Venue");
-					  String venue=scanner.nextLine();
+					  String venue=scanner.next();
 					  sql="Update event set venue='"+ venue +"' where id="+eventId;
 					  dbConnection.update(sql);
 					  break;
 				  case 4:
 					  System.out.println("Enter Rate for Children");
-					  String childRateString=scanner.nextLine();
+					  String childRateString=scanner.next();
 					  while(!checkDouble(childRateString)) {
 							System.out.println("Enter valid Fee for Children");
-							childRateString=scanner.nextLine();
+							childRateString=scanner.next();
 					  }
 					  Double childRate = Double.parseDouble(childRateString);
 					  sql="Update event set child_rate='"+ childRate +"' where id="+eventId;
@@ -191,10 +191,10 @@ public class EventController {
 					  break;
 				  case 5:
 					  System.out.println("Enter Rate for Adult");
-					  String adultRateString=scanner.nextLine();
+					  String adultRateString=scanner.next();
 					  while(!checkDouble(adultRateString)) {
 							System.out.println("Enter valid Fee for Children");
-							adultRateString=scanner.nextLine();
+							adultRateString=scanner.next();
 					  }
 					  Double adultRate = Double.parseDouble(adultRateString);
 					  sql="Update event set adult_rate='"+ adultRate +"' where id="+eventId;
@@ -202,10 +202,10 @@ public class EventController {
 					  break;
 				  case 6:
 					  System.out.println("Enter Rate for Aged");
-					  String agedRateString=scanner.nextLine();
+					  String agedRateString=scanner.next();
 					  while(!checkDouble(agedRateString)) {
 							System.out.println("Enter valid Fee for Children");
-							agedRateString=scanner.nextLine();
+							agedRateString=scanner.next();
 					  }
 					  Double agedRate = Double.parseDouble(agedRateString);
 					  sql="Update event set aged_rate='"+ agedRate +"' where id="+eventId;
