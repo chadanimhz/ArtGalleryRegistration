@@ -16,7 +16,7 @@ public class DbConnection {
 	public Connection getCon() {
 		Connection con;
 		try {
-			String dbPath = "jdbc:sqlite:C:\\Users\\chada\\OneDrive\\Documents\\artGalleryDb.db";
+			String dbPath = "jdbc:sqlite:C:\\Users\\hp\\git\\artgalleryDb.db";
 			con = DriverManager.getConnection(dbPath);
 			return con;
 		}catch (Exception e) {
@@ -161,9 +161,9 @@ public class DbConnection {
 				event.setId(Integer.parseInt(result.getString("id")));
 				event.setName(result.getString("name"));
 				event.setVenue(result.getString("venue"));
-				event.setAgedRate(Integer.parseInt(result.getString("aged_rate")));
-				event.setAdultRate(Integer.parseInt(result.getString("adult_rate")));
-				event.setChildRate(Integer.parseInt(result.getString("child_rate")));
+				event.setAgedRate(Double.parseDouble(result.getString("aged_rate")));
+				event.setAdultRate(Double.parseDouble(result.getString("adult_rate")));
+				event.setChildRate(Double.parseDouble(result.getString("child_rate")));
 				event.setDate(result.getString("date"));
 				statement.close();
 				con.close();

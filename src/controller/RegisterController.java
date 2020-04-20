@@ -1,14 +1,7 @@
 package controller;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.SecureRandom;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.Scanner;
 
 import dao.DbConnection;
@@ -107,7 +100,7 @@ public class RegisterController {
 	}
 	
 	public void registerClient(Registration registration,int eventId){
-		System.out.println("Are you sure you want to confirm registratioin with following information? Type y or n");
+		System.out.println("Are you sure you want to confirm registration with following information?\nType y to confirm else type any other key");
 		System.out.println(registration.toString());
 		
 		String confirm= scanner.nextLine();
@@ -122,7 +115,7 @@ public class RegisterController {
 			LoginController.main(null);
 			
 		}else {
-			System.out.println("Do you want to change the event?Type y or n ");
+			System.out.println("Do you want to change the event?Type y or any key to cancel registration ");
 			String update= scanner.nextLine();
 			if(update.equalsIgnoreCase("y")) {
 				eventId = getEvent();

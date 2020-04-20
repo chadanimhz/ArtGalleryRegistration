@@ -28,7 +28,7 @@ public class EventController {
 		
 		System.out.println("Enter Fee for Children");		
 		String childRateString=scanner.nextLine();
-		while(!checkNumber(childRateString)) {
+		while(!checkDouble(childRateString)) {
 			System.out.println("Enter valid Fee for Children");
 			childRateString=scanner.nextLine();
 		}
@@ -36,7 +36,7 @@ public class EventController {
 		
 		System.out.println("Enter Fee for Adult");
 		String adultRateString=scanner.nextLine();
-		while(!checkNumber(adultRateString)) {
+		while(!checkDouble(adultRateString)) {
 			System.out.println("Enter valid Fee for Adult");
 			adultRateString=scanner.nextLine();
 		}
@@ -44,7 +44,7 @@ public class EventController {
 		
 		System.out.println("Enter Fee for Aged");
 		String agedRateString=scanner.next();
-		while(!checkNumber(agedRateString)) {
+		while(!checkDouble(agedRateString)) {
 			System.out.println("Enter valid Fee for Aged");
 			agedRateString=scanner.next();
 		}
@@ -147,7 +147,7 @@ public class EventController {
 				System.out.println("This Event Cannot be Updated. Customer has already registered for this event ....!!!");
 				update();
 			}
-			System.out.println(" Are you sure you want to update the event with following information? Type y or n");
+			System.out.println(" Are you sure you want to update the event with following information? Type y to confirm else any other key");
 			System.out.println(event.toString());
 			
 			String confirm= scanner.next();
@@ -181,7 +181,7 @@ public class EventController {
 				  case 4:
 					  System.out.println("Enter Rate for Children");
 					  String childRateString=scanner.next();
-					  while(!checkNumber(childRateString)) {
+					  while(!checkDouble(childRateString)) {
 							System.out.println("Enter valid Fee for Children");
 							childRateString=scanner.next();
 					  }
@@ -192,7 +192,7 @@ public class EventController {
 				  case 5:
 					  System.out.println("Enter Rate for Adult");
 					  String adultRateString=scanner.next();
-					  while(!checkNumber(adultRateString)) {
+					  while(!checkDouble(adultRateString)) {
 							System.out.println("Enter valid Fee for Children");
 							adultRateString=scanner.next();
 					  }
@@ -203,7 +203,7 @@ public class EventController {
 				  case 6:
 					  System.out.println("Enter Rate for Aged");
 					  String agedRateString=scanner.next();
-					  while(!checkNumber(agedRateString)) {
+					  while(!checkDouble(agedRateString)) {
 							System.out.println("Enter valid Fee for Children");
 							agedRateString=scanner.next();
 					  }
@@ -244,7 +244,7 @@ public class EventController {
 				System.out.println("This Event Cannot be Deleted. Customer has already registered for this event ....!!!");
 				delete();
 			}
-			System.out.println("Are you sure you want to delete the event with following information? Type y or n");
+			System.out.println("Are you sure you want to delete the event with following information? Type y for yes else other key");
 			System.out.println(event.toString());
 			
 			String confirm= scanner.next();
@@ -303,6 +303,17 @@ public class EventController {
 		} 
 	}
 	
+	public boolean checkDouble(String num) {
+		try {
+		 Double number=  Double.parseDouble(num);
+		 if(number <= 0) {
+			 return false;
+		 }
+		  return true;
+		} catch (NumberFormatException e) {
+		 return false;
+		} 
+	}
 	public boolean checkDate(String date) {
 		if (date.matches("\\d{4}-\\d{2}-\\d{2}")) {
 		   return true;
